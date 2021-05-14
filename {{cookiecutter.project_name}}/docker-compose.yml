@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+  postgres:
+    container_name: postgres_{{cookiecutter.project_name}}
+    image: postgres
+    environment:
+      POSTGRES_USER: '${POSTGRES_USER:-postgres}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-postgres}'
+      PGDATA: /data/postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - {{cookiecutter.project_name}}
+    restart: unless-stopped
+  pgadmin:
+    container_name: pgadmin_{{cookiecutter.project_name}}
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}'
+      PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD:-admin}'
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '${PGADMIN_PORT:-5050}:80'
+    networks:
+      - {{cookiecutter.project_name}}
+    restart: unless-stopped
+networks:
+  {{cookiecutter.project_name}}:
+    driver: bridge
