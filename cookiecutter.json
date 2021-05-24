@@ -1,3 +1,6 @@
 {
-    "project_name": "Project"
+    "project_name": "Project",
+    "project_description":  "Project Description",
+    "author_name":  "Author Name",
+    "author_email": "Author Email"
 }
